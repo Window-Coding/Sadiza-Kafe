@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Kafe Sadiza</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            text-align: center;
+            background-color: #f1f8e9;
+            background-image: url('/api/placeholder/100/100');
+            background-repeat: repeat;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('tampilan-rmh-mkn.jpg') no-repeat center;
+            color: #fff;
+            background-size: cover;
+            padding: 70px 20px;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            border-bottom: 8px solid #2E7D32;
+            position: relative;
+        }
+
+        .menu-buttons {
+            margin: 30px 0;
+            background: rgba(46, 125, 50, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: 0.3s;
+            background: #2E7D32;
+            color: white;
+            border: 2px solid #1b5e20;
+        }
+
+        button:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+        }
+
+        .menu {
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: 0.3s;
+            border: 2px solid #2E7D32;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            /* background: #2E7D32; */
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid #2E7D32;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.2);
+        }
+
+        .card h3 {
+            margin: 15px 0;
+            color: #2E7D32;
+            font-size: 22px;
+        }
+
+        .card p {
+            color: #1b5e20;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .card button {
+            background: #2E7D32;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        .card button:hover {
+            background: #1b5e20;
+        }
+
+        a {
+            background-color: #2E7D32;
+            padding: 10px;
+            margin-top: 40px;
+            margin-bottom: 50px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+
+        }
+
+        /* WhatsApp Float Button */
+        .wa-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .wa-float:hover {
+            background-color: #20ba5a;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .wa-float img {
+            width: 35px;
+            height: 35px;
+            transition: transform 0.3s ease;
+        }
+
+        .wa-float:hover img {
+            transform: scale(1.1);
+        }
+
+        /* WhatsApp Overlay */
+        .wa-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .wa-float:hover {
+            transform: scale(1.1);
+        }
+
+        .wa-float img {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+        }
+
+        .wa-overlay {
+            position: fixed;
+            bottom: 110px;
+            right: 40px;
+            width: 300px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+            z-index: 99;
+        }
+
+        .wa-overlay.active {
+            transform: scale(1);
+        }
+
+        .wa-header {
+            background: #25d366;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wa-header img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .wa-content {
+            padding: 20px;
+        }
+
+        .wa-contact {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .wa-contact:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .wa-contact img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .wa-contact-info h4 {
+            margin: 0;
+            color: #333;
+        }
+
+        .wa-contact-info p {
+            margin: 5px 0 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .kembali {
+            margin-top: 30px;
+        }
+
+
+
+
+        @media (max-width: 360px) {
+            .menu-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 5px;
+                padding: 5px;
+            }
+
+            .header {
+                font-size: 18px;
+                padding: 30px 10px;
+            }
+
+            .card {
+                margin: 0;
+                padding: 5px;
+            }
+
+            .card img {
+                height: 80px;
+            }
+
+            .card h3 {
+                font-size: 12px;
+                margin: 5px 0;
+            }
+
+            .card p {
+                font-size: 10px;
+                margin: 5px 0;
+            }
+
+            .card button {
+                padding: 4px 8px;
+                font-size: 10px;
+                margin-top: 5px;
+            }
+
+            .menu-buttons button {
+                padding: 8px 15px;
+                font-size: 14px;
+                margin: 5px;
+            }
+
+            .menu-buttons {
+                padding: 10px;
+                margin: 15px 0;
+            }
+
+            a {
+                background-color: #2E7D32;
+                padding: 10px;
+
+                border-radius: 10px;
+                color: white;
+                text-decoration: none;
+
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">Selamat Datang di Kafe Sadiza</div>
+
+    <div class="menu-buttons">
+        <button onclick="tampilkanMenu('makanan')">Makanan</button>
+        <button onclick="tampilkanMenu('minuman')">Minuman</button>
+    </div>
+
+    <div id="makanan" class="menu menu-container">
+        <div class="card">
+            <img src="nasigorng ori.jpeg" alt="Ayam Bakar">
+            <h3>Nasi Goreng Original</h3>
+            <p>Harga: Rp 15,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="nasigoreng komplit.jpeg" alt="Ayam Bakar">
+            <h3>Nasi Goreng Komplit</h3>
+            <p>Harga: Rp 18,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="mie rebus ori.jpeg" alt="Ayam Bakar">
+            <h3>Mie Rebus Original</h3>
+            <p>Harga: Rp 13,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="mie rebus komlit.jpeg" alt="Ayam Bakar">
+            <h3>Mie Rebus Komplit</h3>
+            <p>Harga: Rp 15,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="mi gorang ori.jpeg" alt="Ayam Bakar">
+            <h3>Mie Goreng Original</h3>
+            <p>Harga: Rp 13,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="mie goreng komplit.jpeg" alt="Ayam Bakar">
+            <h3>Mie Goreng Komplit</h3>
+            <p>Harga: Rp 15,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="kwetiau.jpg" alt="Ayam Bakar">
+            <h3>Mie Kwitiaw Original</h3>
+            <p>Harga: Rp 15,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="kwetiau komlpit.jpeg" alt="Ayam Bakar">
+            <h3>Mie Kwitiaw Komplit</h3>
+            <p>Harga: Rp 18,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="minas.jpeg" alt="Ayam Bakar">
+            <h3>Mienas Original</h3>
+            <p>Harga: Rp 15,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="mienas.jpg" alt="Ayam Bakar">
+            <h3>Mienas Komplit</h3>
+            <p>Harga: Rp 18,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="spageti bolones.jpeg">
+            <h3>Spageti Bolones</h3>
+            <p>Harga: Rp 18,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="martabak mie.jpeg" alt="Ayam Bakar">
+            <h3>Martabak Mie</h3>
+            <p>Harga: Rp 12,000</p>
+            <button>Ready</button>
+        </div>
+    </div>
+
+
+    <div id="minuman" class="menu menu-container">
+
+        <div class="card">
+            <img src="jus naga.jpeg" alt="Ayam Bakar">
+            <h3>Juss Naga</h3>
+            <p>Harga: Rp 12,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="juss alpukat.jpeg" alt="Ayam Bakar">
+            <h3>Juss Alpukat</h3>
+            <p>Harga: Rp 12,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="juss mngga.jpeg" alt="Ayam Bakar">
+            <h3>Juss Mangga</h3>
+            <p>Harga: Rp 12,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="juss terung pirus.jpeg" alt="Ayam Bakar">
+            <h3>Juss Terung Pirus</h3>
+            <p>Harga: Rp 12,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="juss wortel.jpeg" alt="Ayam Bakar">
+            <h3>Juss Wortel Murni</h3>
+            <p>Harga: Rp 15,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="juss tomat.jpeg" alt="Ayam Bakar">
+            <h3>Juss Tomat Murni</h3>
+            <p>Harga: Rp 15,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="juss jeruk.jpeg" alt="Ayam Bakar">
+            <h3>Juss Jeruk Murni</h3>
+            <p>Harga: Rp 15,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="teh manis.jpeg" alt="Ayam Bakar">
+            <h3>Teh Manis</h3>
+            <p>Harga: Rp 5,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="kopi panas.jpeg" alt="Ayam Bakar">
+            <h3>Kopi Panas</h3>
+            <p>Harga: Rp 6,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="susu dingin.jpeg" alt="Ayam Bakar">
+            <h3>Susu Dingin/Panas</h3>
+            <p>Harga: Rp 7,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="pop ice.jpeg" alt="Ayam Bakar">
+            <h3>Pop Ice All varian</h3>
+            <p>Harga: Rp 7,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="jeruk peras.jpeg" alt="Ayam Bakar">
+            <h3>Jeruk Peras</h3>
+            <p>Harga: Rp 7,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="milo dingin.jpeg" alt="Ayam Bakar">
+            <h3></h3>
+            <p>Harga: Rp Milo Dingin,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="kopi susu.jpeg" alt="Ayam Bakar">
+            <h3>Kopi Susu</h3>
+            <p>Harga: Rp 8,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="lemon tea.jpeg" alt="Ayam Bakar">
+            <h3>Lemon Tea</h3>
+            <p>Harga: Rp 10,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="teh talua.jpeg" alt="Ayam Bakar">
+            <h3>Teh Talua</h3>
+            <p>Harga: Rp 10,000</p>
+            <button>Ready</button>
+        </div>
+        <div class="card">
+            <img src="capcin.jpeg" alt="Ayam Bakar">
+            <h3>Capcin</h3>
+            <p>Harga: Rp 10,000</p>
+            <button>Ready</button>
+        </div>
+
+    </div>
+    <div>
+
+    </div>
+    <div class="kembali">
+        <a href="index1.html">Kembali</a>
+    </div>
+    <div class="wa-float" id="waButton">
+        <img src="wa overlay.png" alt="WhatsApp">
+    </div>
+
+    <div class="wa-overlay" id="waOverlay">
+        <div class="wa-header">
+            <img src="wa overlay.png" alt="WhatsApp">
+            <h3>Hubungi Kami</h3>
+        </div>
+        <div class="wa-content">
+            <a href="https://wa.me/+6285176744402" class="wa-contact">
+                <img src="wa overlay.png" alt="WhatsApp">
+                <div class="wa-contact-info">
+                    <h4>Kafe Sadiza</h4>
+                    <p>Pemesanan & Reservasi</p>
+                </div>
+            </a>
+            <a href="https://wa.me/+6285355974064" class="wa-contact">
+                <img src="wa overlay.png" alt="WhatsApp">
+                <div class="wa-contact-info">
+                    <h4>Customer Service</h4>
+                    <p>Bantuan & Informasi</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+
+    <script>
+        window.onload = function () {
+            // Sembunyikan semua menu terlebih dahulu
+            const menus = document.querySelectorAll('.menu');
+            menus.forEach(menu => {
+                menu.style.display = 'none';
+            });
+
+            // Tampilkan menu makanan sebagai default
+            document.getElementById('makanan').style.display = 'grid';
+
+            // Tambahkan class active ke tombol makanan
+            document.getElementById('btnMakanan').classList.add('active');
+        };
+
+        // Fungsi untuk menampilkan menu yang dipilih
+        function tampilkanMenu(kategori) {
+            // Sembunyikan semua menu
+            const menus = document.querySelectorAll('.menu');
+            menus.forEach(menu => {
+                menu.style.display = 'none';
+            });
+
+            // Tampilkan menu yang dipilih
+            document.getElementById(kategori).style.display = 'grid';
+
+            // Update status active button
+            const buttons = document.querySelectorAll('.menu-buttons button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Tambahkan class active ke tombol yang diklik
+            document.getElementById('btn' + kategori.charAt(0).toUpperCase() + kategori.slice(1)).classList.add('active');
+        }
+
+        const waButton = document.getElementById('waButton');
+        const waOverlay = document.getElementById('waOverlay');
+        let isOverlayVisible = false;
+
+        waButton.addEventListener('click', () => {
+            isOverlayVisible = !isOverlayVisible;
+            if (isOverlayVisible) {
+                waOverlay.classList.add('active');
+            } else {
+                waOverlay.classList.remove('active');
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

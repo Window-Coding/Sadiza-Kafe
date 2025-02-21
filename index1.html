@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="wa.css">
+    <title>S`adiza Cafe</title>
+</head>
+
+<body>
+    <header class="logo-container">
+        <div>
+            <img src="ikon resto.png" alt="">
+        </div>
+        <div>
+            <h1>Welcome to Kafe S`adiza</h1>
+            <h2>Silahkan pilih menu yang Anda inginkan</h2>
+            <h2>Jika ingin Pesan Langsung ke WhatsApp</h2>
+        </div>
+    </header>
+    <!-- <div class="cart-icon" onclick="toggleCart()">
+        <span id="cart-count">0</span>
+        🛒
+    </div> -->
+
+    <!-- overlay wa -->
+
+
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-modal-header">
+            <span>Keranjang Belanja</span>
+            <button onclick="toggleCart()" class="close-cart">✖</button>
+        </div>
+        <div class="cart-modal-content" id="cart-items"></div>
+        <div class="cart-total" id="cart-total">Total: Rp 0</div>
+    </div>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Cari menu..." onkeyup="filterMenu(this.value)">
+        <!-- <div class="search-suggestions">
+            <div class="suggestion-item">
+                <img src="ayam bkr.jpg" alt="Ayam Bakar">
+                <div class="item-details">
+                    <div class="item-name">Ayam Bakar</div>
+                    <div class="item-price">Rp 30,000</div>
+                </div>
+            </div>
+            <div class="suggestion-item">
+                <img src="ayam geprek.jpg" alt="Ayam Geprek">
+                <div class="item-details">
+                    <div class="item-name">Ayam Geprek</div>
+                    <div class="item-price">Rp 25,000</div>
+                </div>
+            </div>
+            <div class="suggestion-item">
+                <img src="ayam pnyet.jpg" alt="Ayam Penyet">
+                <div class="item-details">
+                    <div class="item-name">Ayam Penyet</div>
+                    <div class="item-price">Rp 40,000</div>
+                </div>
+            </div>
+            <div class="suggestion-item">
+                <img src="sop iga.jpg" alt="Sop iga">
+                <div class="item-details">
+                    <div class="item-name">Sop iga</div>
+                    <div class="item-price">Rp 45,000</div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+
+
+
+
+
+    <div class="container">
+        <h1>Menu Best Seller</h1>
+        <div class="grid">
+            <div class="card">
+                <img src="saus padang.jpg" alt="Makanan 5">
+                <h3>Chicken steak saus bbq</h3>
+                <p>Harga: Rp 20,000</p>
+                <button onclick="addToCart('Nasi Padang', 35000, 'naspad.jpg')">Ready</button>
+            </div>
+            
+            <div class="card">
+                <img src="blackpaper.jpg" alt="Makanan 4">
+                <h3>Chicken katsu saus padang</h3>
+                <p>Harga: Rp 22,000</p>
+                <button onclick="addToCart('Nasi Lemak', 15000, 'nasi lemak.jpg')">Ready</button>
+            </div>
+            
+            <div class="card">
+                <img src="blackpaper.jpg" alt="Makanan 4">
+                <h3>Chicken katsu saus blackpapper</h3>
+                <p>Harga: Rp 22,000</p>
+                <button onclick="addToCart('Nasi Lemak', 15000, 'nasi lemak.jpg')">Ready</button>
+            </div>
+            <div class="card">
+                <img src="pecal ayam.jpg" alt="Makanan 2">
+                <h3>Pecal ayam komplit</h3>
+                <p>Harga: Rp 15,000</p>
+                <button onclick="addToCart('Mie Ayam', 15000, 'mie ayam.jpg')">Ready</button>
+            </div>
+
+            <div class="card">
+                <img src="udang.jpg" alt="Makanan 3">
+                <h3>Udang crispy saus padang</h3>
+                <p>Harga: Rp 24,000</p>
+                <button onclick="addToCart('Sate Ayam', 15000, 'sate-ayam.jpg')">Ready</button>
+            </div>
+            <div class="card">
+                <img src="udang.jpg" alt="Makanan 3">
+                <h3>Udang Crispy Saus BBQ</h3>
+                <p>Harga: Rp 24,000</p>
+                <button onclick="addToCart('Sate Ayam', 15000, 'sate-ayam.jpg')">Ready</button>
+            </div>
+            <div class="card">
+                <img src="udang.jpg" alt="Makanan 3">
+                <h3>Udang crispy saus blackpapper</h3>
+                <p>Harga: Rp 24,000</p>
+                <button onclick="addToCart('Sate Ayam', 15000, 'sate-ayam.jpg')">Ready</button>
+            </div>
+
+            
+           
+
+
+            <!-- <div class="card">
+                <img src="ayam bkr.jpg" alt="Makanan 6">
+                <h3>Ayam Bakar</h3>
+                <p>Harga: Rp 30,000</p>
+                <button onclick="addToCart('Ayam Bakar', 30000, 'ayam bkr.jpg')">Ready</button>
+            </div> -->
+            
+        </div>
+
+
+
+
+        <section class="all-menu">
+            <a href="all-menu.html">Lihat Semua Menu</a>
+        </section>
+
+        <div class="wa-float" id="waButton">
+            <img src="wa overlay.png" alt="WhatsApp">
+        </div>
+
+        <div class="wa-overlay" id="waOverlay">
+            <div class="wa-header">
+                <img src="wa overlay.png" alt="WhatsApp">
+                <h3>Hubungi Kami</h3>
+            </div>
+            <div class="wa-content">
+                <a href="https://wa.me/+6285176744402" class="wa-contact">
+                    <img src="wa overlay.png" alt="WhatsApp">
+                    <div class="wa-contact-info">
+                        <h4>Kafe Sadiza</h4>
+                        <p>Pemesanan & Reservasi</p>
+                    </div>
+                </a>
+                <a href="https://wa.me/+6285355974064" class="wa-contact">
+                    <img src="wa overlay.png" alt="WhatsApp">
+                    <div class="wa-contact-info">
+                        <h4>Customer Service</h4>
+                        <p>Bantuan & Informasi</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        
+        
+        
+        <!-- overlay whastapp -->
+        
+        <footer>
+            
+            <div class="footer-wave"></div>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <p>Kafe Sadiza adalah destinasi kuliner yang menyajikan berbagai hidangan autentik Indonesia dengan
+                        cita rasa yang khas dan suasana yang nyaman.</p>
+                        <div class="social-links"> 
+                            <a href="#"><img src="ig.jpg" alt="Instagram"></a>
+                            <a href="#"><img src="tt.png" alt="Instagram"></a>
+                            <a href="#"><img src="fb.png" alt="Instagram"></a>
+                            <a href="#"><img src="wa.jpg" alt="Instagram"></a>
+                        </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <ul class="footer-contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Jl.Empat Lima</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+62 851-767-44402</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@kafesadiza.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Jam Operasional</h3>
+                    <div class="opening-hours">
+                        <div>
+                            <span>Senin - Minggu</span>
+                            <span>10:00 - 22:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Berlangganan newsletter kami untuk mendapatkan informasi terbaru tentang menu dan promo spesial.
+                    </p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Masukkan email Anda">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="googlemap">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.3935413639706!2d100.35429021015226!3d-0.8360772991522873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4c793d03ec099%3A0xf997ca265e301254!2sSa&#39;diza%20Cafe!5e0!3m2!1sid!2sid!4v1739164883938!5m2!1sid!2sid"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kafe Sadiza. Bangga Masakan Indonesia.</p>
+            </div>
+
+        </footer>
+
+
+
+
+
+</body>
+
+<script>
+    function filterMenu(searchText) {
+        const suggestions = document.querySelector('.search-suggestions');
+        const items = document.querySelectorAll('.suggestion-item');
+
+        if (searchText.length > 0) {
+            suggestions.classList.add('show');
+            items.forEach(item => {
+                const name = item.querySelector('.item-name').textContent.toLowerCase();
+                if (name.includes(searchText.toLowerCase())) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        } else {
+            suggestions.classList.remove('show');
+        }
+    }
+
+    // Close suggestions when clicking outside
+    document.addEventListener('click', (e) => {
+        const searchContainer = document.querySelector('.search-container');
+        const suggestions = document.querySelector('.search-suggestions');
+
+        if (!searchContainer.contains(e.target)) {
+            suggestions.classList.remove('show');
+        }
+    });
+</script>
+<script>
+    let cart = [];
+
+    function addToCart(name, price, image) {
+        // Tambahkan item ke array cart
+        cart.push({ name, price, image });
+        // Perbarui tampilan keranjang
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartCount = document.getElementById('cart-count');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const runningTotal = document.getElementById('running-total');
+
+        // Perbarui jumlah item dalam keranjang
+        cartCount.textContent = cart.length;
+
+        // Perbarui daftar item dalam keranjang
+        cartItems.innerHTML = cart
+            .map(
+                (item) =>
+                    `<div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>Rp ${item.price.toLocaleString()}</p>
+                        </div>
+                        <button onclick="removeFromCart('${item.name}')">❌</button>
+                    </div>`
+            )
+            .join('');
+
+        // Hitung total harga
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        cartTotal.textContent = `Total: Rp ${total.toLocaleString()}`;
+        runningTotal.textContent = `Rp ${total.toLocaleString()}`;
+    }
+
+    function removeFromCart(name) {
+        // Hapus item dari array cart berdasarkan nama
+        cart = cart.filter((item) => item.name !== name);
+        // Perbarui tampilan keranjang
+        updateCart();
+    }
+
+    function toggleCart() {
+        const cartModal = document.getElementById('cart-modal');
+        // Toggle kelas "show" untuk menampilkan atau menyembunyikan modal
+        cartModal.classList.toggle('show');
+    }
+
+    function checkout() {
+        alert('Checkout berhasil!');
+        // Kosongkan keranjang setelah checkout
+        cart = [];
+        updateCart();
+    }
+
+    const waButton = document.getElementById('waButton');
+    const waOverlay = document.getElementById('waOverlay');
+    let isOverlayVisible = false;
+
+    waButton.addEventListener('click', () => {
+        isOverlayVisible = !isOverlayVisible;
+        if (isOverlayVisible) {
+            waOverlay.classList.add('active');
+        } else {
+            waOverlay.classList.remove('active');
+        }
+    });
+
+    // Close overlay when clicking outside
+    document.addEventListener('click', (p) => {
+        if (!waButton.contains(p.target) && !waOverlay.contains(e.target) && isOverlayVisible) {
+            isOverlayVisible = false;
+            waOverlay.classList.remove('active');
+        }
+    });
+
+
+</script>
+
+</html>
